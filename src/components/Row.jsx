@@ -4,7 +4,6 @@ import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import Movie from "./Movie";
 const Row = ({ title, fetchUrl, rowId }) => {
   const [movies, setMovies] = useState([]);
-  const [like, setLike] = useState(false);
   const getPopularMovies = async () => {
     const data = await axios.get(fetchUrl);
     setMovies(data.data.results);
@@ -22,7 +21,7 @@ const Row = ({ title, fetchUrl, rowId }) => {
     let slider = document.getElementById("slider" + rowId);
     slider.scrollLeft = slider.scrollLeft + 500;
   };
-  console.log(movies);
+  // console.log(movies);
   return (
     <div className="">
       <h2 className=" text-white p-4 md:text-xl font-bold">{title}</h2>
@@ -30,8 +29,8 @@ const Row = ({ title, fetchUrl, rowId }) => {
         <div
           id={"slider" + rowId}
           className="w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide">
-          {movies.map((movie, id) => (
-            <Movie key={id} movie={movie} like={like} setLike={setLike} />
+          {movies.map((movie) => (
+            <Movie key={movie.id} movie={movie} />
           ))}
         </div>
         <FiArrowLeft
